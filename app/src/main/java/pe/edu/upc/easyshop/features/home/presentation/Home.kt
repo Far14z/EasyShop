@@ -40,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -120,7 +121,7 @@ fun Home() {
                     )
                 },
                 placeholder = {
-                    Text("Search")
+                    Text(stringResource(R.string.placeholder_search))
                 },
                 modifier = Modifier.weight(1f)
             )
@@ -133,13 +134,13 @@ fun Home() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                "Categories",
+                text = stringResource(R.string.label_categories),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
             )
 
             TextButton(onClick = {}) {
-                Text("See all")
+                Text(stringResource(R.string.button_see_all))
             }
         }
 
@@ -202,7 +203,7 @@ fun Home() {
             )
 
             TextButton(onClick = {}) {
-                Text("See all")
+                Text(stringResource(R.string.button_see_all))
             }
         }
 
