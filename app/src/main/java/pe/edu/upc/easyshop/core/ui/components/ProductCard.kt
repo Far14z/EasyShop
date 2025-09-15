@@ -30,9 +30,13 @@ import pe.edu.upc.easyshop.shared.models.Product
 import pe.edu.upc.easyshop.shared.models.products
 
 @Composable
-fun ProductCard(product: Product) {
-    Card(modifier = Modifier.padding(8.dp)) {
-
+fun ProductCard(
+    product: Product,
+    onClick: () -> Unit
+) {
+    Card(modifier = Modifier.padding(8.dp),
+        onClick = onClick
+        ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -84,7 +88,7 @@ fun Preview(){
         columns = GridCells.Fixed(2)
     ) {
         items(products) { product ->
-            ProductCard(product)
+            ProductCard(product) {}
         }
     }
 
