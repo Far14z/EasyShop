@@ -1,4 +1,4 @@
-package pe.edu.upc.easyshop.features.auth.presentation
+package pe.edu.upc.easyshop.features.auth.presentation.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,17 +27,18 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pe.edu.upc.easyshop.core.ui.theme.EasyShopTheme
+import pe.edu.upc.easyshop.features.auth.presentation.di.PresentationModule.getLoginViewModel
 
 @Composable
-fun Login( onLogin: () -> Unit) {
+fun Login(
+    viewModel: LoginViewModel,
+    onLogin: () -> Unit) {
 
-    val email = remember {
-        mutableStateOf(value = "")
-    }
+    val username = viewModel.username.collectAsState()
 
-    var password by remember {
-        mutableStateOf(value = "")
-    }
+    var password = viewModel.password.collectAsState()
+
+    val user = viewModel.user.collectAsState()
 
     val isVisible = remember {
         mutableStateOf(value = false)
@@ -47,9 +49,9 @@ fun Login( onLogin: () -> Unit) {
         verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
-            value = email.value,
+            value = username.value,
             onValueChange = {
-                email.value = it
+                viewModel.updateUsername(it)
             },
             modifier = Modifier.fillMaxWidth().padding(8.dp),
             leadingIcon =  {
@@ -64,9 +66,9 @@ fun Login( onLogin: () -> Unit) {
         )
 
         OutlinedTextField(
-            value = password,
+            value = password.value,
             onValueChange = {
-                password = it
+                viewModel.updatePassword(it)
             },
             modifier = Modifier.fillMaxWidth().padding(8.dp),
             leadingIcon = {
@@ -105,10 +107,15 @@ fun Login( onLogin: () -> Unit) {
         )
 
         Button(
-            onClick = onLogin,
+            onClick = {
+                viewModel.login()
+            },
             modifier = Modifier.fillMaxWidth().padding(8.dp)
         ) {
             Text(text = "Sign in")
+        }
+        user.value?.let {
+            Text("Success")
         }
     }
 }
@@ -117,6 +124,6 @@ fun Login( onLogin: () -> Unit) {
 @Composable
 fun LoginPreview() {
     EasyShopTheme {
-        Login {}
+        Login(getLoginViewModel()) {}
     }
 }
