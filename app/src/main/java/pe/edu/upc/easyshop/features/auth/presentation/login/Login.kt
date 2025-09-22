@@ -17,10 +17,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -36,7 +34,7 @@ fun Login(
 
     val username = viewModel.username.collectAsState()
 
-    var password = viewModel.password.collectAsState()
+    val password = viewModel.password.collectAsState()
 
     val user = viewModel.user.collectAsState()
 
