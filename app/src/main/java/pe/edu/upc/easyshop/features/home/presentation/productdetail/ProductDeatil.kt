@@ -33,7 +33,6 @@ import coil3.compose.AsyncImage
 import pe.edu.upc.easyshop.core.ui.components.RoundedICon
 import pe.edu.upc.easyshop.core.ui.theme.EasyShopTheme
 import pe.edu.upc.easyshop.shared.models.Product
-import pe.edu.upc.easyshop.shared.models.products
 
 @Composable
 fun ProductDetail(product: Product) {
@@ -111,13 +110,5 @@ fun ProductDetail(product: Product) {
                 RoundedICon(Icons.Default.Add)
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ProductDetailPreview() {
-    EasyShopTheme {
-        ProductDetail(products[0])
     }
 }
